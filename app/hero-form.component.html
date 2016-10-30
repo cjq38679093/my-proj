@@ -1,0 +1,50 @@
+<div class="container">
+    <div *ngIf="!submitted">
+        <h1>aaa{{title}}bb</h1>
+        <form action="" method="POST" *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm" role="form">
+            <legend>Form title</legend>
+            {{diagnostic}}
+            {{ttest.value}}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Input field" required="required" [(ngModel)]="model.name" name="name" #name="ngModel">
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+                {{ttest.value}}
+            </div>
+            <div class="form-group">
+                <label for="alterEgo">Alter Ego {{model.alterEgo}} {{ttest.value}}</label>
+                <input type="text" class="form-control" id="alterEgo" name="alterEgo" placeholder="Input field" [(ngModel)]="model.alterEgo" #ttest>
+
+                {{ttest.value}}
+            </div>
+            <div class="form-group">
+                <label for="">Hero Power</label>
+                <select name="power" id="power" class="form-control" required="required" [(ngModel)]="model.power">
+                    <option *ngFor="let p of powers" [value]="p">{{p}}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-default" (click)="newHero()">New Hero{{ttest.value}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!heroForm.form.valid">Submit</button>
+        </form>
+    </div>
+    <div *ngIf="submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+            <div class="col-xs-3">Name</div>
+            <div class="col-xs-9  pull-left">{{ model.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Alter Ego</div>
+            <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Power</div>
+            <div class="col-xs-9 pull-left">{{ model.power }}</div>
+        </div>
+        <br>
+        <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>
+    
+</div>
